@@ -1,0 +1,6 @@
+name: GezelligeDiscordBot
+version: ${project.version}
+author: Itz_KiwiSap_
+api-version: 1.16
+main: nl.itz_kiwisap_.gezelligediscordbot.DiscordBot
+depend: [PlayTimes]
