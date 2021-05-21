@@ -12,11 +12,13 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.Statistic;
+import org.bukkit.advancement.Advancement;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
 import java.awt.*;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.concurrent.TimeUnit;
 
 public class DiscordListener extends ListenerAdapter {
@@ -73,6 +75,25 @@ public class DiscordListener extends ListenerAdapter {
                                 .addField("Keren dood gegaan", getStatistic(offlinePlayer, Statistic.DEATHS), true)
                                 .setColor(Color.CYAN)
                                 .setTimestamp(new Date().toInstant());
+
+                        if(offlinePlayer.isOnline() && offlinePlayer.getPlayer() != null) {
+                            Player onlinePlayer = offlinePlayer.getPlayer();
+                            int advancementsFinished = 0;
+
+                            Iterator<Advancement> advancements = Bukkit.advancementIterator();
+
+                            while(advancements.hasNext()) {
+                                Advancement next = advancements.next();
+
+                                if(onlinePlayer.getAdvancementProgress(next).isDone()) {
+                                    advancementsFinished++;
+                                }
+                            }
+
+                            embedBuilder.addField("Advancements behaald", String.valueOf(advancementsFinished), true);
+                        } else {
+                            embedBuilder.appendDescription("Om het aantal behaalde advancements te bekijken, moet je online zijn.");
+                        }
 
                         event.getChannel().sendMessage(embedBuilder.build()).queue(null, RestActionUtil.ignore);
                     }
