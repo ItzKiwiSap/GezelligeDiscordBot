@@ -70,6 +70,7 @@ public class DiscordListener extends ListenerAdapter {
                                 .addField("Mobs vermoord", getStatistic(offlinePlayer, Statistic.MOB_KILLS), true)
                                 .addField("Items enchanted", getStatistic(offlinePlayer, Statistic.ITEM_ENCHANTED), true)
                                 .addField("Nachten geslapen", getStatistic(offlinePlayer, Statistic.SLEEP_IN_BED), true)
+                                .addField("Keren dood gegaan", getStatistic(offlinePlayer, Statistic.DEATHS), true)
                                 .setColor(Color.CYAN)
                                 .setTimestamp(new Date().toInstant());
 
