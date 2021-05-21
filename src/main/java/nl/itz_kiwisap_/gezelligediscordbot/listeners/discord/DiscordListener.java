@@ -80,11 +80,13 @@ public class DiscordListener extends ListenerAdapter {
                     return;
                 } else if(event.getMessage().getContentRaw().toLowerCase().startsWith("%online")) {
                     EmbedBuilder embedBuilder = new EmbedBuilder()
-                            .setTitle("Online survival mensjes (" + Bukkit.getOnlinePlayers().size() + ")")
+                            .setTitle("Online survival mensjes")
                             .setColor(Color.CYAN)
                             .setTimestamp(new Date().toInstant());
 
                     if(!Bukkit.getOnlinePlayers().isEmpty()) {
+                        embedBuilder.setTitle("Online survival mensjes (" + Bukkit.getOnlinePlayers().size() + ")");
+
                         for (Player player : Bukkit.getOnlinePlayers()) {
                             embedBuilder.appendDescription("- **" + player.getName().replace("_", "\\_") + "**\n");
                         }

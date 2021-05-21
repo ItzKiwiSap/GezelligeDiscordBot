@@ -57,8 +57,8 @@ public class DiscordBot extends JavaPlugin {
                     .setMemberCachePolicy(MemberCachePolicy.ALL)
                     .enableIntents(GatewayIntent.GUILD_MEMBERS)
                     .build();
-            jda.getPresence().setStatus(OnlineStatus.ONLINE);
 
+            jda.getPresence().setStatus(OnlineStatus.ONLINE);
             jda.getPresence().setActivity(Activity.of(Activity.ActivityType.DEFAULT, "survival wereldje :D"));
 
             jda.addEventListener(new ListenerAdapter() {
