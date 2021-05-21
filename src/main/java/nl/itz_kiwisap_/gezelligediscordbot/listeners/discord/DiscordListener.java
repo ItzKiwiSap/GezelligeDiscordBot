@@ -1,6 +1,7 @@
 package nl.itz_kiwisap_.gezelligediscordbot.listeners.discord;
 
-import me.codedred.playtimes.utils.PAPIHolders;
+import me.codedred.playtimes.api.TimelessPlayer;
+import me.codedred.playtimes.api.TimelessServer;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
@@ -41,8 +42,11 @@ public class DiscordListener extends ListenerAdapter {
                             return;
                         }
 
-                        String playTime = PAPIHolders.getHolders(offlinePlayer, "%time% (#%place%)");
-                        String joins = PAPIHolders.getHolders(offlinePlayer, "%timesjoined%");
+                        TimelessServer server = new TimelessServer();
+
+                        String place = (server.getTop10Players().contains(offlinePlayer.getUniqueId())) ? " (#" + server.getTop10Players().indexOf(offlinePlayer.getUniqueId()) + ")" : "";
+                        String playTime = new TimelessPlayer(offlinePlayer.getUniqueId()).getPlayTime() + place;
+                        String joins = String.valueOf(offlinePlayer.getStatistic(Statistic.LEAVE_GAME) + 1);
 
                         EmbedBuilder embedBuilder = new EmbedBuilder()
                                 .setTitle("Informatie " + offlinePlayer.getName().replace("_", "\\_"))
